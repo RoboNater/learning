@@ -1,13 +1,16 @@
-#!/bin/bash
+# source!  # This file must be sourced: 'source /workspace/bin/go1.source-after-restart'
 
-# Need to run following each time container rebooted
+# Setup ssh
 mkdir -p /root/.ssh
 cp -pr /workspace/.ssh/* /root/.ssh
+# The following 2 lines must be sourced in each shell to get ssh-agent to work
 eval "$(ssh-agent -s)"
 ssh-add /root/.ssh/id_rsa_github
-
+# Just confirm we can talk to github
 ssh -T git@github.com
+
 # user.email=26860048+RoboNater@users.noreply.github.com
 git config --global user.email 26860048+RoboNater@users.noreply.github.com
 
 git config --global user.name RoboNater
+
